@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New York MeMeS</title>
+    <style>
+        /* Estilos simples para a página */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .content {
+            margin-top: 20px;
+        }
+        .meme, .article {
+            border: 1px solid #ddd;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>New York MeMeS</h1>
+        
+        <!-- Formulário para adicionar novo meme ou artigo -->
+        <form id="form">
+            <input type="text" id="content" placeholder="Insira o URL do meme ou do artigo">
+            <button type="button" onclick="adicionarConteudo()">Adicionar</button>
+        </form>
+
+        <!-- Formulário para pesquisa -->
+        <input type="text" id="searchInput" onkeyup="pesquisar()" placeholder="Pesquisar...">
+        
+        <!-- Conteúdo existente -->
+        <div class="content" id="conteudo">
+            <!-- Os memes e artigos adicionados serão exibidos aqui -->
+        </div>
+    </div>
+
+    <script>
+        // Função para adicionar novo conteúdo (meme ou artigo)
+        function adicionarConteudo() {
+            var conteudoInput = document.getElementById("content").value;
+            var conteudoDiv = document.createElement("div");
+            conteudoDiv.className = "meme"; // ou "article" dependendo do tipo de conteúdo
+            conteudoDiv.innerHTML = conteudoInput;
+            document.getElementById("conteudo").appendChild(conteudoDiv);
+        }
+
+        // Função para pesquisar conteúdo
+        function pesquisar() {
+            var input, filter, divs, div, txtValue;
+            input = document.getElementById("searchInput");
+            filter = input.value.toUpperCase();
+            divs = document.querySelectorAll(".meme, .article");
+            for (var i = 0; i < divs.length; i++) {
+                div = divs[i];
+                txtValue = div.textContent || div.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    div.style.display = "";
+                } else {
+                    div.style.display = "none";
+                }
+            }
+        }
+    </script>
+</body>
+</html>
